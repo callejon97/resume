@@ -1,5 +1,5 @@
 name: Build PDF document
-run-name: Deploy ${{ github.actor }} CV
+run-name: Build ${{ github.actor }} PDF document
 on: 
   push:
     branches: ["main"]
