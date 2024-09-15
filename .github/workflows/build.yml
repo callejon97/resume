@@ -33,7 +33,7 @@ jobs:
           cd /tmp && wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && 
           zcat < install-tl-unx.tar.gz | tar xf - &&
           cd $(ls -d /tmp/install-tl-* | head -n 1) &&
-          perl ./install-tl --no-interaction --scheme=basic &&
+          perl ./install-tl --no-interaction --scheme=scheme-basic &&
           tlmgr install latexmk && tlmgr install texliveonfly &&
           export PATH=$PATH:/usr/local/texlive/${CUR_YEAR}/bin/x86_64-linux
       - name: Build pdf
