@@ -25,9 +25,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Get current date
-        run: echo "{CUR_DATE}={$(date +'%Y-%m-%d')}" >> $GITHUB_STATE
+        run: echo "CUR_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Get current year
-        run: echo "{CUR_YEAR}={$(date +'%Y')}" >> $GITHUB_STATE
+        run: echo "CUR_YEAR=$(date +'%Y')" >> $GITHUB_ENV
       - name: Install requirements
         run: |
           cd /tmp && wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && 
