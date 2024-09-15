@@ -26,10 +26,17 @@ jobs:
       - uses: actions/checkout@v4
       - name: Get current date
         run: echo "CUR_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_STATE
+      - name: Get current year
+        run: echo "CUR_YEAR=$(date +'%Y')" >> $GITHUB_STATE
       - name: Install requirements
-        run: sudo apt-get -q update &&     sudo apt-get install -yq texlive-basic
+        run: |
+          cd /tmp && wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && 
+          zcat < install-tl-unx.tar.gz | tar xf - && cd install-tl-${CUR_DATE} &&
+          perl ./install-tl --no-interaction --scheme=basic &&
+          tlmgr install latexmk && tlmgr install texliveonfly &&
+          export PATH=$PATH:/usr/local/texlive/${CUR_YEAR}/bin/x86_64-linux
       - name: Build pdf
-        run: latexmk -pdf -auxdir=build -emulate-aux-dir resume.tex
+        run: texliveonfly -c latexmk -pdf -auxdir=build -emulate-aux-dir resume.tex
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
