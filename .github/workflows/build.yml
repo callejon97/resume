@@ -34,7 +34,7 @@ jobs:
           zcat < install-tl-unx.tar.gz | tar xf -
       - name: Install requirements (2)
         run: |
-          cd ./install-tl-* &&
+          cd /tmp/install-tl-* &&
           perl ./install-tl --no-interaction --scheme=basic &&
           tlmgr install latexmk && tlmgr install texliveonfly &&
           export PATH=$PATH:/usr/local/texlive/${CUR_YEAR}/bin/x86_64-linux
