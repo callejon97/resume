@@ -28,17 +28,10 @@ jobs:
         run: echo "CUR_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Get current year
         run: echo "CUR_YEAR=$(date +'%Y')" >> $GITHUB_ENV
-      - name: Install requirements
-        run: |
-          cd /tmp && wget https://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz && 
-          zcat < install-tl-unx.tar.gz | tar xf - &&
-          cd $(ls -d /tmp/install-tl-* | head -n 1) &&
-          sudo perl ./install-tl --no-interaction --scheme=scheme-basic &&
-          export PATH=$PATH:/usr/local/texlive/${CUR_YEAR}/bin/x86_64-linux &&
-          echo $PATH &&
-          sudo tlmgr install latexmk && sudo tlmgr install texliveonfly
       - name: Build pdf
-        run: texliveonfly -c latexmk -pdf -auxdir=build -emulate-aux-dir resume.tex
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: resume.tex
       - name: Archive code coverage results
         uses: actions/upload-artifact@v4
         with:
