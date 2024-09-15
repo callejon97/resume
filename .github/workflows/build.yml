@@ -27,7 +27,7 @@ jobs:
       - name: Get current date
         run: echo "CUR_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_STATE
       - name: Install requirements
-        run: sudo apt-get -q update &&     sudo apt-get install -yq texlive-full
+        run: sudo apt-get -q update &&     sudo apt-get install -yq texlive-basic
       - name: Build pdf
         run: latexmk -pdf -auxdir=build -emulate-aux-dir resume.tex
       - name: Archive code coverage results
