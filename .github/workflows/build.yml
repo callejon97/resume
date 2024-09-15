@@ -35,6 +35,7 @@ jobs:
           cd $(ls -d /tmp/install-tl-* | head -n 1) &&
           sudo perl ./install-tl --no-interaction --scheme=scheme-basic &&
           export PATH=$PATH:/usr/local/texlive/${CUR_YEAR}/bin/x86_64-linux &&
+          echo $PATH &&
           sudo tlmgr install latexmk && sudo tlmgr install texliveonfly
       - name: Build pdf
         run: texliveonfly -c latexmk -pdf -auxdir=build -emulate-aux-dir resume.tex
