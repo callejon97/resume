@@ -34,8 +34,8 @@ jobs:
           zcat < install-tl-unx.tar.gz | tar xf - &&
           cd $(ls -d /tmp/install-tl-* | head -n 1) &&
           sudo perl ./install-tl --no-interaction --scheme=scheme-basic &&
-          tlmgr install latexmk && tlmgr install texliveonfly &&
-          export PATH=$PATH:/usr/local/texlive/${CUR_YEAR}/bin/x86_64-linux
+          export PATH=$PATH:/usr/local/texlive/${CUR_YEAR}/bin/x86_64-linux &&
+          tlmgr install latexmk && tlmgr install texliveonfly
       - name: Build pdf
         run: texliveonfly -c latexmk -pdf -auxdir=build -emulate-aux-dir resume.tex
       - name: Archive code coverage results
